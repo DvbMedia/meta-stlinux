@@ -13,7 +13,7 @@ PACKAGES_DYNAMIC += "kernel-module-*"
 inherit gitpkgv
 
 SRCREV = "${AUTOREV}"
-INC_PR = "r14"
+INC_PR = "r15"
 PV = "0.5+git${SRCPV}"
 
 BINARY_PTI_NP_PATH ?= "/data/pti_np"
@@ -57,7 +57,7 @@ do_configure_prepend () {
 	rm -f .config 
         printf "export CONFIG_PLAYER_191=y\nexport CONFIG_MULTICOM324=y\n" > .config
 	# disable wireless build
-	# sed -i 's/^\(obj-y.*+= wireless\)/# \1/' Makefile
+	sed -i 's/^\(obj-y.*+= wireless\)/# \1/' Makefile
 	# disable led and button - it's not for spark
 	sed -i 's@^\(obj-y.*+= \(led\|button\)/\)@# \1@' Makefile
 }
